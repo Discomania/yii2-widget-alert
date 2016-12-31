@@ -132,9 +132,11 @@ class AlertBlock extends \yii\bootstrap\Widget
         $flashes = $session->getAllFlashes();
         $delay = $this->delay;
         foreach ($flashes as $alert => $message) {
+			$message = (array) $message;
+			foreach ($message as $mess) {
             if (!empty($this->alertSettings[$alert])) {
                 $settings = $this->alertSettings[$alert];
-                $settings['body'] = $message;
+                $settings['body'] = $mess;
                 if (empty($settings['closeButton'])) {
                     $settings['closeButton'] = $this->closeButton;
                 }
